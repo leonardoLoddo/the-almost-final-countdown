@@ -1,19 +1,19 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 export default function Player() {
   const [enteredPlayerName, setEnteredPlayerName] = useState();
-  const [isSubmitted, setIsSubmitted] = useState();
-  function handleChange(event) {
-    setIsSubmitted(false);
-    setEnteredPlayerName(event.target.value);
-  }
+  const playerName = useRef();
+
   function handleClick() {
-    setIsSubmitted(true);
+    setEnteredPlayerName(playerName.current.value); //una costante useRef una volta associata ad un elemento jsx andrá a contenere lo stesso all'interno della sua chiave 'current', il funzionamento é molto simile a una cattura in manipolazione del dom
+    playerName.current.value = ""; //svuoto il campo input
   }
   return (
     <section id="player">
-      <h2>Benvenuto/a {isSubmitted ? enteredPlayerName : "entità ignota"}</h2>
+      <h2>Benvenuto/a {enteredPlayerName ?? "entità ignota"}</h2>
+      {/* con questa sintassi dico che se enteredPlayerName é truthy deve essere mostrato altrimenti mostra la stringa */}
       <p>
-        <input type="text" onChange={handleChange} value={enteredPlayerName} />
+        <input ref={playerName} type="text" />
+        {/* creo il riferimento con la costante useRef() */}
         <button onClick={handleClick}>Salva</button>
       </p>
     </section>
