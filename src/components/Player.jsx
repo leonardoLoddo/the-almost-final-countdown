@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 export default function Player() {
-  const [enteredPlayerName, setEnteredPlayerName] = useState();
+  const [enteredPlayerName, setEnteredPlayerName] = useState(null);
   const playerName = useRef();
 
   function handleClick() {
