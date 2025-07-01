@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 export default function ResultModal({
   ref,
   targetTime,
@@ -7,7 +8,7 @@ export default function ResultModal({
   const userLost = remainingTime <= 0; //se il tempo rimanente é 0 il moio utente ha perso
   const formattedRemainingTime = (remainingTime / 1000).toFixed(2); //formatto il tempo rimasto in secondi
   const score = Math.round((1 - remainingTime / (targetTime * 1000)) * 100); //calcolo il punteggio
-  return (
+  return createPortal(
     // associo lo useRef dialog all'elemento dialog in modo da potervi accedere dal componente TimerChallenge
     // valorizzo il parametro onCLose con la funzione destinata al reset, in questo modo l'utente potrà chiudere sia tramite bottone che tramite esc
     <dialog ref={ref} className="result-modal" onClose={onReset}>
@@ -29,6 +30,7 @@ export default function ResultModal({
       <form method="dialog">
         <button>Chiudi</button>
       </form>
-    </dialog>
+    </dialog>, //createPortal accetta due parametri: l'elemento jsx e il contenitore nel quale andrá a finire
+    document.getElementById("modal") //cattura del div con id 'modal' presente in index.html
   );
 }
