@@ -18,7 +18,7 @@ Il giocatore inserisce il proprio nome, sceglie un livello di difficoltà, e fa 
 Per eseguire il progetto in locale:
 
 ```bash
-git clone https://github.com/tuo-username/the-almost-final-countdown.git
+git clone https://github.com/leonardoLoddo/the-almost-final-countdown.git
 cd the-almost-final-countdown
 npm install
 npm run dev
